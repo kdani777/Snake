@@ -26,6 +26,7 @@ downwards is corresponds to the +y direction
 
 '''
 import pygame as pg
+from PIL import Image
 
 pg.init() # Can't do much without first intializing pygame
 
@@ -48,12 +49,8 @@ class Snake:
     def moveDown(self):
         self.y = self.y + self.speed
 
-
-
-# pygame.event.pump() will keep pygame in synch with our system
-# Typically want to call this once per game loop
-pg.event.pump()
-keys = pg.key.get_pressed()
+img = Image.new('RGB',(800, 600), (100,100,100))
+img.save('background.png', 'PNG')
 
 class Game:
 
@@ -65,10 +62,62 @@ class Game:
         self._running = True
         self._display_surf = None
         self._image_surf = None
-        self.player = Player()
+        self.player = Snake()
 
     def on_init(self): # Upon initializing this game...
+        pg.init()
+        self._display_surf = pg.display.set_mode((self.width, self.height), pg.HWSURFACE)
+
+        pg.display.set_caption('Snake')
+        self._running = True
+        self._image_surf = pg.image.load('background.png').convert()
+
+    def on_event(self, event):
+        if event.type == QUIT:
+            self._running = False
+
+    def on_loop(self):
+        pass
+
+    def on_render(self):
+        self.__display_surf.fill((0,0,0))
+        self._display_surf.blit(self._image_surf,(self.snake.x, self.snake.y))
+        pg.display.flip()
+
+    def on_cleanup(self):
+        pg.quit()
+
+    def on_execute(self):
+        if self.on_init() == False:
+            self._running = False
+
+        while not self._running:
+            pg.event.pump()
+            keys = pg.key.get_pressed()
+        # pygame.event.pump() will keep pygame in synch with our system
+        # Typically want to call this once per game loop
+
+            if (keys[pg.K_RIGHT]):
+                self.snake.moveRight()
+
+            if(keys[pg.K_LEFT]):
+                self.snake.moveLeft()
+
+            if(keys[pg.K_UP]):
+                self.snake.moveUp()
+
+            if(keys[pg.K_DOWN]):
+                self.snake.moveDown()
+
+            if(keys[pg.K_ESCAPE]):
+                self._running = False
+
+            self.on_loop
+            self.on_render()
+        self.on_cleanup()
+
+if __name__ == '__main__':
+    play = Game()
+    play.on_execute()
 
 
-# if (keys[pg.K_RIGHT]):
-#     print('Right arrow pressed.')
