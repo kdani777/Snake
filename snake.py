@@ -66,7 +66,7 @@ class Snake():
     def __init__(self):
         self.x = 10
         self.y = 10
-        self.speed = 2
+        self.speed = 1
         self.color = (0, 255, 0)
         self.direction = "right"
         self.block_size = 20
@@ -88,20 +88,20 @@ class Snake():
 
 def initial_snake(snake_size, block_size, nblocks_width, nblocks_height):
     s = Snake()
-    s.x = (random.randint(snake_size, nblocks_width))*block_size
-    s.y = (random.randint(snake_size, nblocks_height))*block_size
+    s.x = random.randint(snake_size, nblocks_width)
+    s.y = random.randint(snake_size, nblocks_height)
     snakes = []
     for i in range(snake_size):
         new_snake = Snake()
-        new_snake.x = s.x - i*block_size
+        new_snake.x = s.x - i
         new_snake.y = s.y
         snakes.append(new_snake)
     return snakes
 
 def spawn_apple(nblocks_width, nblocks_height, block_size):
     apple = Apple()
-    apple.x = random.randint(1, nblocks_width-1)*block_size
-    apple.y = random.randint(1, nblocks_height-1)*block_size
+    apple.x = random.randint(1, nblocks_width-1)
+    apple.y = random.randint(1, nblocks_height-1)
     return apple
 
 def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, nblocks_width, nblocks_height):
@@ -111,64 +111,67 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
     apple = spawn_apple(nblocks_width, nblocks_height, block_size)
     while True:
         DISPLAYSURF.fill((0,0,0))
-        apple2 = pygame.Rect(apple.x, apple.y, block_size, block_size)
-        pygame.draw.rect(DISPLAYSURF, apple.color, apple2)
+        apple2 = pygame.Rect(apple.x*block_size, apple.y*block_size, block_size, block_size)
+        pygame.draw.rect(DISPLAYSURF, apple.color, apple2)  
         for s in snakes:
-            snake = pygame.Rect(s.x, s.y, block_size, block_size)
+            y = s.y*block_size
+            x = s.x*block_size
+            snake = pygame.Rect(x, y, block_size, block_size)
+            print x,y
             pygame.draw.rect(DISPLAYSURF, s.color, snake)
             pygame.display.update()
-            key_pressed = pygame.event.get(KEYUP)
-            for event in pygame.event.get():
-                if event.type == QUIT:
+        key_pressed = pygame.event.get(KEYUP)
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+        if len(key_pressed) > 0:
+            if key_pressed[0].key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-            if len(key_pressed) > 0:
-                if key_pressed[0].key == K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
-                elif key_pressed[0].key == K_RIGHT:
-                    if snakes[0].direction == "up" or snakes[0].direction == "down":
-                        print "right"
-                        snakes[0].direction = "right"
-                        snake_turns.update({(snakes[0].x, snakes[0].y): "right"})
-                elif key_pressed[0].key == K_LEFT:
-                    if snakes[0].direction == "up" or snakes[0].direction == "down":
-                        snakes[0].direction = "left"
-                        snake_turns.update({(snakes[0].x, snakes[0].y): "left"})
-                        print "left"
-                elif key_pressed[0].key == K_UP:
-                    if snakes[0].direction == "right" or snakes[0].direction == "left":
-                        snakes[0].direction = "up"
-                        snake_turns.update({(snakes[0].x, snakes[0].y): "up"})
-                        print "up"
-                elif key_pressed[0].key == K_DOWN:
-                    if snakes[0].direction == "right" or snakes[0].direction == "left":
-                        snakes[0].direction = "down"
-                        snake_turns.update({(snakes[0].x, snakes[0].y): "down"})
-                        print "down"
-            if snakes[0].direction == "right":
-                snakes[0].move_right()
-            elif snakes[0].direction == "left":
-                snakes[0].move_left()
-            elif snakes[0].direction == "up":
-                snakes[0].move_up()  
-            elif snakes[0].direction == "down":
-                snakes[0].move_down()
-            for i in range(1, len(snakes)):
-                if snakes[i].direction == "right":
-                    snakes[i].move_right()
-                elif snakes[i].direction == "left":
-                    snakes[i].move_left()
-                elif snakes[i].direction == "up":
-                    snakes[i].move_up()  
-                elif snakes[i].direction == "down":
-                    snakes[i].move_down()
-                if (snakes[i].x, snakes[i].y) in snake_turns:
-                    snakes[i].direction = snake_turns[(snakes[i].x, snakes[i].y)]
-                    if i == len(snakes)-1:
-                        del snake_turns[(snakes[i].x, snakes[i].y)]
-            if (snakes[0].x, snakes[0].y) == (apple.x, apple.y):
-                print "hit apple"
+            elif key_pressed[0].key == K_RIGHT:
+                if snakes[0].direction == "up" or snakes[0].direction == "down":
+                    print "right"
+                    snakes[0].direction = "right"
+                    snake_turns.update({(snakes[0].x, snakes[0].y): "right"})
+            elif key_pressed[0].key == K_LEFT:
+                if snakes[0].direction == "up" or snakes[0].direction == "down":
+                    snakes[0].direction = "left"
+                    snake_turns.update({(snakes[0].x, snakes[0].y): "left"})
+                    print "left"
+            elif key_pressed[0].key == K_UP:
+                if snakes[0].direction == "right" or snakes[0].direction == "left":
+                    snakes[0].direction = "up"
+                    snake_turns.update({(snakes[0].x, snakes[0].y): "up"})
+                    print "up"
+            elif key_pressed[0].key == K_DOWN:
+                if snakes[0].direction == "right" or snakes[0].direction == "left":
+                    snakes[0].direction = "down"
+                    snake_turns.update({(snakes[0].x, snakes[0].y): "down"})
+                    print "down"
+        if snakes[0].direction == "right":
+            snakes[0].move_right()
+        elif snakes[0].direction == "left":
+            snakes[0].move_left()
+        elif snakes[0].direction == "up":
+            snakes[0].move_up()  
+        elif snakes[0].direction == "down":
+            snakes[0].move_down()
+        for i in range(1, len(snakes)):
+            if snakes[i].direction == "right":
+                snakes[i].move_right()
+            elif snakes[i].direction == "left":
+                snakes[i].move_left()
+            elif snakes[i].direction == "up":
+                snakes[i].move_up()  
+            elif snakes[i].direction == "down":
+                snakes[i].move_down()
+            if (snakes[i].x, snakes[i].y) in snake_turns:
+                snakes[i].direction = snake_turns[(snakes[i].x, snakes[i].y)]
+                if i == len(snakes)-1:
+                    del snake_turns[(snakes[i].x, snakes[i].y)]
+        if (snakes[0].x, snakes[0].y) == (apple.x, apple.y):
+            print "hit apple"
         pygame.display.update()
         fpsClock.tick(FPS)
 
