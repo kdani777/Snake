@@ -2,122 +2,113 @@
 Authors: Kunal Dani, Shyanne Salen, Marina Morrow
 Last Modified: April 18th, 2019
 
-This file contains the code used to play a game of snake with a twist.
-The goal is for the snake to eat a set of cherries (or units of something) without eating itself.
-Everytime the snake eats one cherry, it will get bigger by one unit.
-After it eats 10 cherries, it will change color. Users can try to see who can
-eat the most cherries or who can finish the 5 levels (50 cherries total?).
-
-Planning
-The we can break this down into components:
-First making the snake class and giving it the ability to move using arrow keys
-Next we can set up our grid, its dimensions as well as randomize the location of the cherry
-everytime the snake position overlaps with the cherry position (can use overlap from lazor)
-Then we can give the snake the attribute of growing everytime it overlaps/eats the cherry.
-Finally we can worry about the twist, and the different snake skins
-If we would like to add extra, we can add scores or do a multiplayer game like slither.io, where
-we can give another user their own snake and the ability to move using other keys (like -w,-a,-s,-d etc.)
-
-Our board will be similar to the Lazor board where the origin starts
-at the top right and moving right is moving in the +x direction while moving
-downwards is corresponds to the +y direction
-
-
-
 '''
-import pygame as pg
-from PIL import Image
+from pygame.locals import *
+import pygame, sys
 
-pg.init() # Can't do much without first intializing pygame
+FPS = 10
+game_width = 500
+game_height = 500
+block_size = 20
 
-class Snake:
-    x = 10
-    y = 10
-    speed = 1  # Can adjust how many pixels/units the snake moves
+def get_colors():
+    '''
+    This function assigns a value to set colors to easily be able to
+    assign colors to a block.
 
-    # Focus is on x-axis, moving left and right
-    def moveRight(self):
-        self.x = self.x + self.speed
+    Colors that the grid will use:
+        0 - Black
+        1 - White
+        2 - Gray
+        3 - Light blue
+        4 - red
+        5 - green
 
-    def moveLeft(self):
-        self.x = self.x - self.speed
+    **Returns**
 
-    # Focus is on y-axis and movements up and down
-    def moveUp(self):
-        self.y = self.y - self.speed
+        color_map: *dict, int, tuple*
+            A dictionary that will correlate the integer key to
+            a color.
+    '''
+    return {
+        0: (169,169,169),
+        1: (255, 255, 255),
+        2: (0, 0, 0),
+        3: (153, 204, 255),
+        4: (255, 0, 0),
+        5: (0, 255, 0)
+    }
 
-    def moveDown(self):
-        self.y = self.y + self.speed
+ 
+display_surf = pygame.display.set_mode((400, 300))
+pygame.display.set_caption('Snake')
 
-img = Image.new('RGB',(800, 600), (100,100,100))
-img.save('background.png', 'PNG')
+global FPSCLOCK, DISPLAYSURF
 
-class Game:
+pygame.init()
+DISPLAYSURF = pygame.display.set_mode((game_width, game_height))
 
-    width = 800
-    height = 600
-    player = 0
+def title_screen():
+    while True:
+        # print pygame.font.get_fonts()
+        font = pygame.font.SysFont('gillsansultra', 50)
+        font2 = pygame.font.SysFont('gillsansultra', 20)
+        title = font.render('Snake', True, (255,255,255))
+        subtitle = font2.render('Press any key to contine, Press escape to escape', True, (155, 155, 0))
+        DISPLAYSURF.blit(title, (100,100))
+        DISPLAYSURF.blit(subtitle, (0, 200))
+        pygame.display.update()
 
-    def __init__(self):
-        self._running = True
-        self._display_surf = None
-        self._image_surf = None
-        self.player = Snake()
+        key_pressed = pygame.event.get(KEYUP)
+        if len(key_pressed) > 0:
+            print key_pressed
+            if key_pressed[0].key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+            else:
+                pygame.event.get()
+                return
+   
+title_screen()
+# class Snake:
+#     x = 10
+#     y = 10
+#     speed = 1  # Can adjust how many pixels/units the snake moves
 
-    def on_init(self): # Upon initializing this game...
-        pg.init()
-        self._display_surf = pg.display.set_mode((self.width, self.height), pg.HWSURFACE)
+#     # Focus is on x-axis, moving left and right
+#     def move_right(self):
+#         self.x = self.x + self.speed
 
-        pg.display.set_caption('Snake')
-        self._running = True
-        self._image_surf = pg.image.load('background.png').convert()
+#     def move_left(self):
+#         self.x = self.x - self.speed
 
-    def on_event(self, event):
-        if event.type == QUIT:
-            self._running = False
+#     # Focus is on y-axis and movements up and down
+#     def move_upwards(self):
+#         self.y = self.y - self.speed
 
-    def on_loop(self):
-        pass
+#     def move_downwards(self):
+#         self.y = self.y + self.speed
 
-    def on_render(self):
-        self.__display_surf.fill((0,0,0))
-        self._display_surf.blit(self._image_surf,(self.snake.x, self.snake.y))
-        pg.display.flip()
+# # pygame.event.pump() will keep pygame in synch with our system
+# # Typically want to call this once per game loop
+# pg.event.pump()
+# keys = pg.key.get_pressed()
 
-    def on_cleanup(self):
-        pg.quit()
+# class Game:
 
-    def on_execute(self):
-        if self.on_init() == False:
-            self._running = False
+#     width = 800
+#     height = 600
+#     player = 0
 
-        while not self._running:
-            pg.event.pump()
-            keys = pg.key.get_pressed()
-        # pygame.event.pump() will keep pygame in synch with our system
-        # Typically want to call this once per game loop
+#     def __init__(self):
+#         self._running = True
+#         self._display_surf = None
+#         self._image_surf = None
+#         self.player = Player()
 
-            if (keys[pg.K_RIGHT]):
-                self.snake.moveRight()
-
-            if(keys[pg.K_LEFT]):
-                self.snake.moveLeft()
-
-            if(keys[pg.K_UP]):
-                self.snake.moveUp()
-
-            if(keys[pg.K_DOWN]):
-                self.snake.moveDown()
-
-            if(keys[pg.K_ESCAPE]):
-                self._running = False
-
-            self.on_loop
-            self.on_render()
-        self.on_cleanup()
-
-if __name__ == '__main__':
-    play = Game()
-    play.on_execute()
+#     def on_init(self): # Upon initializing this game...
+#     	pg.init()
 
 
+# if (keys[pg.K_RIGHT]):
+# 	print('Right arrow pressed.')
