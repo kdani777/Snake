@@ -87,6 +87,7 @@ class Snake():
         for i in range(len(self.x)-1,0,-1):
             self.x[i] = self.x[i-1]
             self.y[i] = self.y[i-1]
+
     # Focus is on x-axis, moving left and right
     def add_snake_pieces(self):
         if self.x[-1] == self.x[-2]:
@@ -98,8 +99,8 @@ class Snake():
 
 def initial_snake(snake_size, block_size, nblocks_width, nblocks_height):
     snake = Snake()
-    x = random.randint(snake_size, nblocks_width)
-    y = random.randint(snake_size, nblocks_height)
+    x = random.randint(2+snake_size, nblocks_width-5)
+    y = random.randint(2+snake_size, nblocks_height-5)
     snake.x = [x]
     snake.y = [y]
     for i in range(snake_size):
@@ -107,18 +108,16 @@ def initial_snake(snake_size, block_size, nblocks_width, nblocks_height):
         snake.y.append(snake.y[0])
     return snake
 
-
-
 def spawn_apple(nblocks_width, nblocks_height, block_size):
     apple = Apple()
-    apple.x = random.randint(1, nblocks_width-1)
-    apple.y = random.randint(1, nblocks_height-1)
+    apple.x = random.randint(2, nblocks_width-2)
+    apple.y = random.randint(2, nblocks_height-2)
     return apple
 
 def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, nblocks_width, nblocks_height):
     pygame.display.update()
     hit_apple = False
-    snake = initial_snake(5, block_size, nblocks_width, nblocks_height)
+    snake = initial_snake(3, block_size, nblocks_width, nblocks_height)
     snake_turns = {}
     apple = spawn_apple(nblocks_width, nblocks_height, block_size)
     while True:
@@ -146,6 +145,7 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
                     snake.direction = "right"
             elif key_pressed[0].key == K_LEFT:
                 if snake.direction == "up" or snake.direction == "down":
+                    print "left"
                     snake.direction = "left"
             elif key_pressed[0].key == K_UP:
                 if snake.direction == "right" or snake.direction == "left":
@@ -160,12 +160,20 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
             print "hit apple"
             apple = spawn_apple(nblocks_width, nblocks_height, block_size)
             snake.add_snake_pieces()
-            # print len(snakes)
+        elif snake.x[0] == -1 or snake.y[0] == -1:
+            print "wall"
+            return
+        elif snake.x[0] == nblocks_width or snake.y[0] == nblocks_height:
+            print "wall"
+            return
+        if (snake.x[0], snake.y[0]) in zip(snake.x[2:], snake.y[2:]):
+                print "hit itself"
+                return
 
         pygame.display.update()
         fpsClock.tick(FPS)
 
-def play_game(game_width = 500, game_height = 500, FPS = 5, block_size = 20):
+def play_game(game_width = 500, game_height = 500, FPS = 7, block_size = 20):
     pygame.init()
     nblocks_width = int(game_width/block_size)
     nblocks_height = int(game_height/block_size)
@@ -175,75 +183,7 @@ def play_game(game_width = 500, game_height = 500, FPS = 5, block_size = 20):
     DISPLAYSURF = pygame.display.set_mode((game_width, game_height))
     title_screen(DISPLAYSURF)
     move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_width, game_height, nblocks_width, nblocks_height)
-    
+    print "game_over"
 
-play_game()
-
-# class Game:
-
-#     width = 800
-#     height = 600
-#     player = 0
-
-#     def __init__(self):
-#         self._running = True
-#         self._display_surf = None
-#         self._image_surf = None
-#         self.player = Snake()
-
-#     def on_init(self): # Upon initializing this game...
-#         pg.init()
-#         self._display_surf = pg.display.set_mode((self.width, self.height), pg.HWSURFACE)
-
-#         pg.display.set_caption('Snake')
-#         self._running = True
-#         self._image_surf = pg.image.load('background.png').convert()
-
-#     def on_event(self, event):
-#         if event.type == QUIT:
-#             self._running = False
-
-#     def on_loop(self):
-#         pass
-
-#     def on_render(self):
-#         self.__display_surf.fill((0,0,0))
-#         self._display_surf.blit(self._image_surf,(self.snake.x, self.snake.y))
-#         pg.display.flip()
-
-#     def on_cleanup(self):
-#         pg.quit()
-
-#     def on_execute(self):
-#         if self.on_init() == False:
-#             self._running = False
-
-#         while not self._running:
-#             pg.event.pump()
-#             keys = pg.key.get_pressed()
-#         # pygame.event.pump() will keep pygame in synch with our system
-#         # Typically want to call this once per game loop
-
-#             if (keys[pg.K_RIGHT]):
-#                 self.snake.moveRight()
-
-#             if(keys[pg.K_LEFT]):
-#                 self.snake.moveLeft()
-
-#             if(keys[pg.K_UP]):
-#                 self.snake.moveUp()
-
-#             if(keys[pg.K_DOWN]):
-#                 self.snake.moveDown()
-
-#             if(keys[pg.K_ESCAPE]):
-#                 self._running = False
-
-#             self.on_loop
-#             self.on_render()
-#         self.on_cleanup()
-
-# if __name__ == '__main__':
-#     play = Game()
-#     play.on_execute()
-
+if __name__ == '__main__':
+    play_game()
