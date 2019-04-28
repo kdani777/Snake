@@ -21,6 +21,4 @@ Use the arrow keys to move the snake to eat the apples. Avoid trying to eat the 
 *Enjoy!*
 
 By: 
-Kunal Dani
-Marina Morrow
-Shyanne Salen
+Kunal Dani, Marina Morrow, Shyanne Salen
