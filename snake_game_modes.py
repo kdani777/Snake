@@ -158,6 +158,9 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
     random_snakes_spawned = False
     while True:
         DISPLAYSURF.fill(colors[background])
+        if game_mode == "Multiplayer Mode":
+            print "yaaas"
+            move_second_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, nblocks_width, nblocks_height, game_mode, snake_2)
         key_pressed = pygame.event.get(KEYUP)
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -208,8 +211,9 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
                 random_number_snakes = random.randint(1, 3)
                 random_snakes = []
                 for b in range(random_number_snakes):
-                    random_snakes.append(initial_random_snakes(3, block_size, nblocks_width, nblocks_height, snake))
-                    random_snakes[b].color = 3
+                    snake_size = random.randint(3,5)
+                    random_snakes.append(initial_random_snakes(snake_size, block_size, nblocks_width, nblocks_height, snake))
+                    random_snakes[b].color = 16
                     random_snakes_spawned = True
         elif snake.x[0] == -1 or snake.y[0] == -1:
             print "wall"
@@ -242,6 +246,18 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
                         print "hit random snake"
                         return
                 random_snakes[j].move()
+                if random_snakes[j].x[0] == -1:
+                    random_snakes[j].direction = "right"
+                    random_snakes[j].move()
+                elif random_snakes[j].y[0] == -1:
+                    random_snakes[j].direction = "down"
+                    random_snakes[j].move()
+                elif random_snakes[j].x[0] == game_width:
+                    random_snakes[j].direction = "left"
+                    random_snakes[j].move()
+                elif random_snakes[j].y[0] == game_height:
+                    random_snakes[j].direction = "up"
+                    random_snakes[j].move()
                 for i in range(len(random_snakes[j].x)):
                     y = random_snakes[j].y[i]*block_size
                     x = random_snakes[j].x[i]*block_size
