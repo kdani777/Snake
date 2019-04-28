@@ -50,6 +50,10 @@ def mode_screen(DISPLAYSURF, game_width, game_height):
         text3 = font.render("Rotten Apples Mode", True, colors[10])
         DISPLAYSURF.subsurface(rect3)
         DISPLAYSURF.subsurface(rect3).blit(text3, (3, 0))
+        rect4 = pygame.draw.rect(DISPLAYSURF, colors[16], (game_width/2-(101), 400, 202, 25))
+        text4 = font.render("Random Snakes Mode", True, colors[10])
+        DISPLAYSURF.subsurface(rect4)
+        DISPLAYSURF.subsurface(rect4).blit(text4, (3, 0))
         pygame.display.update()
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -64,6 +68,10 @@ def mode_screen(DISPLAYSURF, game_width, game_height):
         elif game_width/2+(190/2) > mouse[0] > game_width/2-(190/2) and 300+25 > mouse[1] > 300:
             if click[0] == 1:
                 game_mode = "Rotten Apples Mode"
+                return game_mode
+        elif game_width/2+(101) > mouse[0] > game_width/2-(101) and 400+25 > mouse[1] > 400:
+            if click[0] == 1:
+                game_mode = "Random Snakes Mode"
                 return game_mode
         key_pressed = pygame.event.get(KEYUP)
         for event in pygame.event.get():

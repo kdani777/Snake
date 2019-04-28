@@ -104,6 +104,23 @@ def initial_snake(snake_size, block_size, nblocks_width, nblocks_height):
         snake.y.append(snake.y[0])
     return snake
 
+def initial_random_snakes(snake_size, block_size, nblocks_width, nblocks_height, snake):
+    random_snake = Snake()
+    x = random.randint(2+snake_size, nblocks_width/2)
+    y = random.randint(2+snake_size, nblocks_height/2)
+    while snake.x[0] < x < snake.x[0] + 20 and snake.y[0] < y < snake.y[0] + 20:
+        x = random.randint(2, nblocks_width-2)
+        y = random.randint(2, nblocks_height-2)
+    while (x,y) in zip(snake.x, snake.y):
+        x = random.randint(2, nblocks_width-2)
+        y = random.randint(2, nblocks_height-2)
+    random_snake.x = [x]
+    random_snake.y = [y]
+    for i in range(snake_size):
+        random_snake.x.append(random_snake.x[0] - i)
+        random_snake.y.append(random_snake.y[0])
+    return random_snake
+
 def spawn_apple(nblocks_width, nblocks_height, block_size, snake, game_mode):
     apple = Apple()
     apple.x = random.randint(2, nblocks_width-2)
@@ -138,6 +155,7 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
     background = 0
     score_color = 1
     rotten_apples_spawned = False
+    random_snakes_spawned = False
     while True:
         DISPLAYSURF.fill(colors[background])
         key_pressed = pygame.event.get(KEYUP)
@@ -186,6 +204,13 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
                     rotten_apples.append(spawn_apple(nblocks_width, nblocks_height, block_size, snake, game_mode))
                     rotten_apples[a].color = 17
                     rotten_apples_spawned = True
+            elif game_mode == "Random Snakes Mode":
+                random_number_snakes = random.randint(1, 3)
+                random_snakes = []
+                for b in range(random_number_snakes):
+                    random_snakes.append(initial_random_snakes(3, block_size, nblocks_width, nblocks_height, snake))
+                    random_snakes[b].color = 3
+                    random_snakes_spawned = True
         elif snake.x[0] == -1 or snake.y[0] == -1:
             print "wall"
             return
@@ -202,6 +227,26 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_height, game_width, 
                     return
                 r_apple = pygame.Rect(rotten_apples[i].x*block_size, rotten_apples[i].y*block_size, block_size, block_size)
                 pygame.draw.rect(DISPLAYSURF, colors[rotten_apples[i].color], r_apple)
+        if random_snakes_spawned:
+            for j in range(random_number_snakes):
+                if random_snakes[j].direction == "right":
+                    random_snakes[j].direction = random.choice(("up", "down", "right"))
+                elif random_snakes[j].direction == "left":
+                    random_snakes[j].direction = random.choice(("up", "down", "left"))
+                elif random_snakes[j].direction == "up":
+                    random_snakes[j].direction = random.choice(("right", "left", "up"))
+                elif random_snakes[j].direction == "down":
+                    random_snakes[j].direction = random.choice(("right", "left", "down"))
+                for i in range(len(random_snakes[j].x)):
+                    if (snake.x[0], snake.y[0]) == (random_snakes[j].x[i], random_snakes[j].y[i]):
+                        print "hit random snake"
+                        return
+                random_snakes[j].move()
+                for i in range(len(random_snakes[j].x)):
+                    y = random_snakes[j].y[i]*block_size
+                    x = random_snakes[j].x[i]*block_size
+                    s = pygame.Rect(x, y, block_size, block_size)
+                    pygame.draw.rect(DISPLAYSURF, colors[random_snakes[j].color], s)
         apple2 = pygame.Rect(apple.x*block_size, apple.y*block_size, block_size, block_size)
         pygame.draw.rect(DISPLAYSURF, colors[apple.color], apple2)  
         for i in range(len(snake.x)):
