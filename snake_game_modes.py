@@ -53,7 +53,7 @@ def get_colors():
         14: (255, 153, 153),
         15: (155, 155, 0),
         16: (0, 120, 0),
-        17: (218,165,32)
+        17: (101,67,33)
     }
 
 def initial_random_snakes(snake_size, nblocks_width, nblocks_height, snake):
