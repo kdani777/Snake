@@ -101,14 +101,12 @@ def spawn_random_snakes(nblocks_width, nblocks_height, snake):
     '''
     '''
     random_number_snakes = random.randint(1, 3)
-    print random_number_snakes
     random_snakes = []
     for b in range(random_number_snakes):
         snake_size = random.randint(3,5)
         random_snakes.append(initial_random_snakes(snake_size, nblocks_width, nblocks_height, snake))
         random_snakes[b].color = 16
         random_snakes_spawned = True
-    print len(random_snakes)
     return random_snakes, random_snakes_spawned, random_number_snakes
 
 def draw_rotten_apples(DISPLAYSURF, random_number_rotten, rotten_apples, snake, block_size, colors):
@@ -124,7 +122,6 @@ def draw_rotten_apples(DISPLAYSURF, random_number_rotten, rotten_apples, snake, 
 def draw_random_snakes(random_number_snakes, random_snakes, snake, DISPLAYSURF, colors, nblocks_width, nblocks_height, block_size):
     '''
     '''
-    print random_number_snakes
     hit_random_snake = False
     for j in range(random_number_snakes):
         if random_snakes[j].direction == "right":
