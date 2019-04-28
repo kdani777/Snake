@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+### Welcome to procrasti-snake!
 
-You can use the [editor on GitHub](https://github.com/kdani777/Snake/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Are you ready to waste hours of your precious time on a simple, yet exasperating game? 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Well you've come to the right place!
 
-### Markdown
+In this twist of the classic game snake, we have created 4 different ways to procrastinate.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+First level **classic mode**:
+use the arrow keys to move the snake around the screen to eat the apples. Avoid hitting the wall or trying to eat yourself.
 
-```markdown
-Syntax highlighted code block
+Second level **color changing mode**:
+use the arrow keys to move the snake. The snake, apple, and background will change color when the snake eats an apple.
 
-# Header 1
-## Header 2
-### Header 3
+Third level **rotten apples mode**:
+use the arrow keys to move the snake to eat the apples. Do not eat the brown rotten apples. Avoid the wall and trying to eat yourself.
 
-- Bulleted
-- List
+Fourth level **random snakes mode**:
+Use the arrow keys to move the snake to eat the apples. Avoid trying to eat the dark green snakes. Avoid the wall and eating yourself.
 
-1. Numbered
-2. List
+*Enjoy!*
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kdani777/Snake/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+By: 
+Kunal Dani
+Marina Morrow
+Shyanne Salen
