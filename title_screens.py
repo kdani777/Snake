@@ -46,6 +46,10 @@ def mode_screen(DISPLAYSURF, game_width, game_height):
         text2 = font.render("Color Changing Mode", True, colors[10])
         DISPLAYSURF.subsurface(rect2)
         DISPLAYSURF.subsurface(rect2).blit(text2, (3, 0))
+        rect3 = pygame.draw.rect(DISPLAYSURF, colors[16], (game_width/2-(190/2), 300, 190, 25))
+        text3 = font.render("Rotten Apples Mode", True, colors[10])
+        DISPLAYSURF.subsurface(rect3)
+        DISPLAYSURF.subsurface(rect3).blit(text3, (3, 0))
         pygame.display.update()
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -53,9 +57,13 @@ def mode_screen(DISPLAYSURF, game_width, game_height):
             if click[0] == 1:
                 game_mode = "Classic"
                 return game_mode
-        if game_width/2+100 > mouse[0] > game_width/2-100 and 200+25 > mouse[1] > 200:
+        elif game_width/2+100 > mouse[0] > game_width/2-100 and 200+25 > mouse[1] > 200:
             if click[0] == 1:
                 game_mode = "Color Changing Mode"
+                return game_mode
+        elif game_width/2+(190/2) > mouse[0] > game_width/2-(190/2) and 300+25 > mouse[1] > 300:
+            if click[0] == 1:
+                game_mode = "Rotten Apples Mode"
                 return game_mode
         key_pressed = pygame.event.get(KEYUP)
         for event in pygame.event.get():
