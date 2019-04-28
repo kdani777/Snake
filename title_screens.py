@@ -107,15 +107,16 @@ def mode_screen(DISPLAYSURF, game_width, game_height):
             if click[0] == 1:
                 game_mode = "Classic Mode"
                 return game_mode
-        elif game_width/2+100 > mouse[0] > game_width/2-100 and 200+25 > mouse[1] > 200:
+        elif game_width/2+(250/2) > mouse[0] > game_width/2-(250/2) and 160+30 > mouse[1] > 160:
             if click[0] == 1:
                 game_mode = "Color Changing Mode"
                 return game_mode
-        elif game_width/2+(190/2) > mouse[0] > game_width/2-(190/2) and 300+25 > mouse[1] > 300:
+        elif game_width/2+(230/2) > mouse[0] > game_width/2-(230/2) and 270+30 > mouse[1] > 270:
             if click[0] == 1:
                 game_mode = "Rotten Apples Mode"
                 return game_mode
-        elif game_width/2+(101) > mouse[0] > game_width/2-(101) and 400+25 > mouse[1] > 400:
+                game_width/2-(250/2), 380, 250,
+        elif game_width/2+(250/2) > mouse[0] > game_width/2-(250/2) and 380+30 > mouse[1] > 380:
             if click[0] == 1:
                 game_mode = "Random Snakes Mode"
                 return game_mode
