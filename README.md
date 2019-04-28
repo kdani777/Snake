@@ -1,4 +1,4 @@
-### Welcome To Procrasti-snake!
+### Welcome to Procrasti-snake!
 
 Are you ready to waste hours of your precious time on a simple, yet exasperating game? 
 
