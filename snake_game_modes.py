@@ -90,7 +90,7 @@ def spawn_rotten_apples(nblocks_width, nblocks_height, snake, game_mode):
     '''
     '''
     rotten_apples = []
-    random_number_rotten = random.randint(1, 3)
+    random_number_rotten = random.randint(1, 5)
     for a in range(random_number_rotten):
         rotten_apples.append(spawn_apple(nblocks_width, nblocks_height, snake, game_mode))
         rotten_apples[a].color = 17
@@ -101,12 +101,14 @@ def spawn_random_snakes(nblocks_width, nblocks_height, snake):
     '''
     '''
     random_number_snakes = random.randint(1, 3)
+    print random_number_snakes
     random_snakes = []
     for b in range(random_number_snakes):
         snake_size = random.randint(3,5)
         random_snakes.append(initial_random_snakes(snake_size, nblocks_width, nblocks_height, snake))
         random_snakes[b].color = 16
         random_snakes_spawned = True
+    print len(random_snakes)
     return random_snakes, random_snakes_spawned, random_number_snakes
 
 def draw_rotten_apples(DISPLAYSURF, random_number_rotten, rotten_apples, snake, block_size, colors):
@@ -122,6 +124,7 @@ def draw_rotten_apples(DISPLAYSURF, random_number_rotten, rotten_apples, snake, 
 def draw_random_snakes(random_number_snakes, random_snakes, snake, DISPLAYSURF, colors, nblocks_width, nblocks_height, block_size):
     '''
     '''
+    print random_number_snakes
     hit_random_snake = False
     for j in range(random_number_snakes):
         if random_snakes[j].direction == "right":
@@ -154,7 +157,7 @@ def draw_random_snakes(random_number_snakes, random_snakes, snake, DISPLAYSURF, 
             x = random_snakes[j].x[i]*block_size
             s = pygame.Rect(x, y, block_size, block_size)
             pygame.draw.rect(DISPLAYSURF, colors[random_snakes[j].color], s)
-        return hit_random_snake
+    return hit_random_snake
 
 def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_width, nblocks_width, nblocks_height, game_mode):
     '''
