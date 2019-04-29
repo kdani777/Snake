@@ -1,5 +1,5 @@
 '''
-Authors: Kunal Dani, Shyanne Salen, Marina Morrow
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen,
 Last Modified: April 29th, 2019
 Snake Project
 Software Carpentry
@@ -8,9 +8,9 @@ Classic Snake
 This file contains the functions for the classic snake game. This 
 file contains the Snake and Apple classes that facilitate the 
 attributes of the snake and apple, respectively. It also contains 
-functions that will define the starting snake, create the apples, 
-show score during gameplay, and help make the snake move using the 
-arrow keys on a keyboard.
+functions that will define the starting snake, create the apples 
+to be hit, show score during gameplay, and allows for the user to
+move the snake using arrows on a keyboard 
 
 ***CLASS***
     Apple
@@ -21,13 +21,13 @@ arrow keys on a keyboard.
         dimensions, color, speed and direction. The class also contains
         the move function that helps facilitate how and with what speed
         the snake will move. There is an additional function that helps
-        append a new piece to the end of the snake, which is necessary 
-        for when the snake eats an apple.
+        append a new piece to the end of the snake, which occurs when 
+        the snake eats an apple.
 
 ***FUNCTIONS***
     initial_snake
         This function creates the snake upon start up of the game and
-        determines it starting position within the screen.
+        determines it's starting position within the screen.
     spawn_apple
         This function facilitates where the apple will spawn on the 
         game screen.
@@ -47,7 +47,7 @@ class Apple(object):
     '''
     The Apple class creates an apple object. The apple color is 
     initially set as 2, which corresponds to the color red in the 
-    get_colors function in snake_game_modes.py. It also just sets 20
+    get_colors function in snake_game_modes.py. It also sets 20
     and 20 as the position x and y.
 
     ***Functions***
@@ -72,7 +72,7 @@ class Snake():
     '''
     The Snake class creates a snake object that can be moved around the 
     game screen in four different directions (up, down, right, left)
-    and at particular speed. It also determines the position for the 
+    and at a particular speed. It also determines the position for the 
     head of the snake.
 
     ***Functions***
@@ -119,7 +119,8 @@ class Snake():
         snake by appending a new position to the list of positions the 
         body of the snake already occupies.
 
-        A segment is added during gameplay when the snake eats an apple.
+        A segment is added to the end of the snake
+        during gameplay when the snake eats an apple.
         '''
         if self.x[-1] == self.x[-2]:
             self.x.append(self.x[-1])
@@ -232,9 +233,9 @@ def show_score(current_score, game_width, DISPLAYSURF, score_color, colors):
 
 def get_key_pressed(snake):
     '''
-    This is a function that facilitates how the snake object moves upon
-    pressing one of the fours arrow keys during gameplay. It determines
-    the direction of the snake class.
+    This is a function that facilitates how the snake object moves when
+    the user presses one of the fours arrow keys during gameplay. It 
+    determines the direction of the snake class.
 
     **Parameters**
         snake: *class, obj*

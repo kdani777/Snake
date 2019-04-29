@@ -1,26 +1,27 @@
 '''
-Authors: Kunal Dani, Shyanne Salen, Marina Morrow
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen,
 Last Modified: April 29th, 2019
 Snake Project w/ Different Game Modes
 Software Carpentry
 Game Mode Code
 
-This file sets up the different game modes for our version of the game 
-nake. The classic case consist of a snake manipulated by the user with 
+This file sets up the different game modes for our "twist" of the game 
+snake. The classic mode consists of a snake manipulated by the user with 
 the arrow keys. The goal of the game is for the snake eat as many apples
-as possibly without hitting the walls or trying to eat itself. As the 
-snake continues to at the apples, it grows by one unit. Our snake game 
+as possibly without hitting the walls or hitting itself. As the 
+snake continues to eat the apples, it grows by one unit. Our snake game 
 consists of three other modes. For all game modes, the snake is still
-manuvered using the arrow keys to try to eat the apples. In all game 
-modes, if the snake hits a wall or itself, then the game is over.
+manuvered using the arrow keys in an attempt to eat the apples. In all 
+game modes, if the snake hits a wall or itself,  the game is over.
 
 The other game modes include:
 1.) Color Changing Mode - Snake, apple and grid change colors randomly 
 after the snake eats an apple.
-2.) Rotten Apple Mode - The snake must avoid eating the rotten apples 
-while continuing to try to eat normal apples.
+2.) Rotten Apple Mode - The snake must avoid eating the randomly appearing
+rotten apples while continuing to try to eat normal apples.
 3.) Random Snake Mode - Snake must avoid eating the random snakes that 
-appear and move randomly around the screen.
+appear and move randomly around the screen. Snake will continue trying
+to eat the normal apples and running into itself.
 
 This code relies on the classic_snake.py file to function.
 
@@ -30,8 +31,8 @@ This code relies on the classic_snake.py file to function.
 		includes the snake and apple classes. It also contains the code 
 		that places a snake and an apple on the screen. Additionally, 
 		the get_key_pressed	function determines how the snake moves 
-		based on the key imput. The	show score function keeps track of 
-		the number of apples eaten and displays it on the screen.
+		based on the user key imput. The show score function keeps track 
+        of the number of apples eaten and displays it on the screen.
 
 ***Functions***
     The functions in this file are:
@@ -124,8 +125,8 @@ def get_colors():
 def initial_random_snakes(snake_size, nblocks_width, nblocks_height, snake):
     '''
     This function will initialize a snake object and create a list of
-    the random snake objects. It determines the initial starting 
-    position of these snakes.
+    random snake objects. It determines the initial starting 
+    positions of these snakes.
 
     **Parameters**
         snake_size: *int*
@@ -280,7 +281,7 @@ def draw_rotten_apples(DISPLAYSURF, random_number_rotten, rotten_apples, \
 	snake, block_size, colors):
     '''
     This function draws the rotten apples to the screen by determining
-    how big it is and the color. It also determine if it was hit by the
+    how big it is and the color. It also determines if it was hit by the
     user manipulated snake.
 
     **Parameters**

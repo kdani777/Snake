@@ -1,30 +1,31 @@
 '''
-Authors: Kunal Dani, Shyanne Salen, Marina Morrow
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen, 
 Last Modified: April 29th, 2019
 Snake Project w/ Different Game Modes
 Software Carpentry
 Snake Code
 
-This file is the main file for our Snake game. This file contains of 
+This file is the main file for our Snake game. This file contains 
 the function that helps facilitate the initialization of Snake 
-gameplay. The classic game consist of a snake the user manipulates
-using the arrow keys. The goal of the game is for the snake eat as 
-many apples as possibly without hitting the walls or eating itself. 
-As the snake continues to eat the apples, it grows by one unit. Our 
-snake game consists of three other modes. For all game modes, the 
-snake is still manuvered using the arrow keys to try to eat the apples.
-In all game modes, if the snake hits a wall or itself, then the game 
-is over.
+gameplay. he classic mode consists of a snake manipulated by the user with 
+the arrow keys. The goal of the game is for the snake eat as many apples
+as possibly without hitting the walls or hitting itself. As the 
+snake continues to eat the apples, it grows by one unit. Our snake game 
+consists of three other modes. For all game modes, the snake is still
+manuvered using the arrow keys in an attempt to eat the apples. In all 
+game modes, if the snake hits a wall or itself,  the game is over.
 
 The other game modes include:
 1.) Color Changing Mode - Snake, apple and grid change colors randomly 
 after the snake eats an apple.
-2.) Rotten Apple Mode - The snake must avoid eating the rotten apples 
-while continuing to try to eat normal apples.
+2.) Rotten Apple Mode - The snake must avoid eating the randomly appearing
+rotten apples while continuing to try to eat normal apples.
 3.) Random Snake Mode - Snake must avoid eating the random snakes that 
-appear and move randomly around the screen.
+appear and move randomly around the screen. Snake will continue trying
+to eat the normal apples and running into itself.
 
-This code relies on the classic_snake.py file to function.
+This code relies on the classic_snake.py and snake_game_modes.py, and 
+title_screens.py files to function.
 
 **Files**
     tile_screens.py
@@ -63,10 +64,10 @@ def play_game(game_width = 500, game_height = 500, FPS = 10, block_size = 20):
 
     **Parameters**
         game_width: *int*
-            This integer corresponds to the width of the screen the 
+            This integer corresponds to the width of the screen for the 
             game.
         game_height: *int*
-            This integer corresponds to the height of the screen the 
+            This integer corresponds to the height of the screen forthe 
             game. These must be divisible by block_size.
         FPS: *int*
             This integer represents to the frames per seconds or the 
@@ -78,7 +79,7 @@ def play_game(game_width = 500, game_height = 500, FPS = 10, block_size = 20):
 
     **Returns**
         play_again: *boolean*
-            This determines the the user has pressed any key except
+            This determines that the user has pressed any key except
             escape during the game over screen to continue to play the
             game another time.
     '''

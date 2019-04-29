@@ -1,5 +1,5 @@
 '''
-Authors: Kunal Dani, Shyanne Salen, Marina Morrow
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen,
 Last Modified: April 29th, 2019
 Snake Project
 Software Carpentry
@@ -7,10 +7,10 @@ Title Screens
 
 This file contains the code corresponding to the formatting and
 functionalization of the title screen that appears upon start up of
-the Snake game. Upon startup the user will be given instruction on how
+the Snake game. Upon startup, the user will be given instruction on how
 to proceed or exit the game. If the user proceeds, they will be 
 instructed to pick one of the four game modes. From there, they will 
-navigated to the game of their choosing until they lose. Upon losing
+play to the game of their choosing until they lose. Upon losing
 the user will be given directions for if they want to either play 
 again or exit the game. This function relies on the snake_game_modes.py
 file for the colors.
@@ -44,7 +44,7 @@ from snake_game_modes import get_colors
 def title_screen(DISPLAYSURF, game_width):
     '''
     This function formats and functionalizes the title screen. On the
-    title screen the user will see instructions on how to either
+    title screen, the user will see instructions on how to either
     proceed to gameplay or exit the game.
 
     **Parameter**
@@ -95,9 +95,8 @@ def mode_screen(DISPLAYSURF, game_width):
     This function formats and functionalizes the mode screen.
     On the mode screen the user will see directed to one of the
     four game modes and may click on the one of their choosing using
-    their cursor. Upon clicking they will be redirected to the game 
-     mode
-    and the game will initiate.
+    their cursor. Upon clicking a mode, they will be redirected to the 
+    game mode and the game will initiate.
 
     **Parameter**
         DISPLAYSURF: *class*
@@ -231,7 +230,7 @@ def game_over_screen(DISPLAYSURF, game_width, score):
     '''
     This function formats and functionalizes the game over screen.
     Upon completion of the game the user will see this screen, which
-    consists of a 'Game Over' sign and the users score. They will 
+    consists of a 'Game Over' sign and the user's score. They will 
     also be instructed on how to play a new game or exit the entire 
     game. All actions will be conducted via keyboard keys.
 
@@ -247,7 +246,7 @@ def game_over_screen(DISPLAYSURF, game_width, score):
     **Return**
         Function will return itself upon being called, and all 
         parameters and formatting associated with the game over screen 
-        will be displayed in addition to the users score and 
+        will be displayed in addition to the user's score and 
         instructions on how to exit the game or continue playing.
 
         play_again: *Boolean*
