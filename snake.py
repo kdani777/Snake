@@ -18,8 +18,8 @@ game modes, if the snake hits a wall or itself,  the game is over.
 The other game modes include:
 1.) Color Changing Mode - Snake, apple and grid change colors randomly 
 after the snake eats an apple.
-2.) Rotten Apple Mode - The snake must avoid eating the randomly appearing
-rotten apples while continuing to try to eat normal apples.
+2.) Rotten Apple Mode - The snake must avoid eating the randomly 
+appearing rotten apples while continuing to try to eat normal apples.
 3.) Random Snake Mode - Snake must avoid eating the random snakes that 
 appear and move randomly around the screen. Snake will continue trying
 to eat the normal apples and running into itself.
@@ -67,8 +67,8 @@ def play_game(game_width = 500, game_height = 500, FPS = 10, block_size = 20):
             This integer corresponds to the width of the screen for the 
             game.
         game_height: *int*
-            This integer corresponds to the height of the screen forthe 
-            game. These must be divisible by block_size.
+            This integer corresponds to the height of the screen for 
+            the game. These must be divisible by block_size.
         FPS: *int*
             This integer represents to the frames per seconds or the 
             speed at which the game is played. These must be
