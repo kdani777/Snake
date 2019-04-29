@@ -16,7 +16,7 @@ Third level **rotten apples mode**:
 use the arrow keys to move the snake to eat the apples. Do not eat the brown rotten apples. Avoid the wall and trying to eat yourself.
 
 Fourth level **random snakes mode**:
-Use the arrow keys to move the snake to eat the apples. Avoid trying to eat the dark green snakes. Avoid the wall and eating yourself.
+use the arrow keys to move the snake to eat the apples. Avoid trying to eat the dark green snakes. Avoid the wall and eating yourself.
 
 *Enjoy!*
 
