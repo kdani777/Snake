@@ -1,7 +1,7 @@
 '''
 Authors: Kunal Dani, Shyanne Salen, Marina Morrow
 Last Modified: April 29th, 2019
-Lazor Project
+Snake Project
 Software Carpentry
 Classic Snake
 
