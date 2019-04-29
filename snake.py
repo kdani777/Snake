@@ -40,7 +40,7 @@ This code relies on the classic_snake.py file to function.
         includes the snake and apple classes. It also contains the code 
         that places a snake and an apple on the screen. Additionally, 
         the get_key_pressed function determines how the snake moves 
-        based on the key imput. The show score function keeps track of 
+        based on the key input. The show score function keeps track of 
         the number of apples eaten and displays it on the screen.
 
 ***Functions***
