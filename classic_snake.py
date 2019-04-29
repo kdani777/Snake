@@ -119,8 +119,8 @@ class Snake():
         snake by appending a new position to the list of positions the 
         body of the snake already occupies.
 
-        A segment is added to the end of the snake
-        during gameplay when the snake eats an apple.
+        A segment is added to the end of the snake during gameplay when
+        the snake eats an apple.
         '''
         if self.x[-1] == self.x[-2]:
             self.x.append(self.x[-1])
@@ -195,7 +195,8 @@ def spawn_apple(nblocks_width, nblocks_height, snake, game_mode):
         apple.x = random.randint(2, nblocks_width - 2)
         apple.y = random.randint(2, nblocks_height - 2)
     if game_mode == "Rotten Apples Mode":
-        while snake.x[0] < apple.x < snake.x[0] + 10 and snake.y[0] < apple.y < snake.y[0] + 10:
+        while snake.x[0] < apple.x < snake.x[0] + 10 and snake.y[0] < \
+         apple.y < snake.y[0] + 10:
             apple.x = random.randint(2, nblocks_width - 2)
             apple.y = random.randint(2, nblocks_height - 2)
     return apple
