@@ -1,10 +1,19 @@
 '''
 Authors: Kunal Dani, Shyanne Salen, Marina Morrow
-Last Modified: April 18th, 2019
+Last Modified: April 29th, 2019
+Snake Project w/ Different Game Modes
+Software Carpentry
+Snake Code
 
+This code consists of the function that helps facilitate the initialization of Snake gameplay.
+The classic game consist of a snake the user can manipulate using the arrow keys.
+The goal of the game is for the snake eat as many apples as possibly without hitting 
+the walls or eating itself. As the snake continues to eat the apples, it grows by one unit.
 
-Ideas for interesting twists - Levels game, color-changing, shrinking
-screen, new blocks come up to avoid.
+Other game modes include:
+1.) Color Changing Mode - Snake, apple and grid changing colors after the snake eats an apple
+2.) Rotton Apple Mode - The snake must avoid eating the rotton apples while continuing tryin to eat normal apples.
+3.) Random Snake Mode - Snake must avoid eating the random snakes that appear after eating each apples
 '''
 from pygame.locals import *
 import pygame, sys
@@ -14,6 +23,19 @@ from snake_game_modes import move_snake
 
 def play_game(game_width = 500, game_height = 500, FPS = 10, block_size = 20):
     '''
+    This function initializes pygame and runs the game snake
+
+    **Parameters**
+        game_width: *int*
+            This integer corresponds to the width of the screen the game is played on
+        game_height: *int*
+            This integer corresponds to the height of the screen the game is played on
+        FPS: *int*
+            This integer represents to the frames per seconds or the speed at which
+            the game is played
+        block_size: *int*
+            This integer represents the size of the blocks used to initially create all snake
+            and apple objects present during gameplay
     '''
     pygame.init()
     nblocks_width = int(game_width/block_size)
