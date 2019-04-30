@@ -43,6 +43,8 @@ title_screens.py files to function.
         the get_key_pressed function determines how the snake moves 
         based on the key input. The show score function keeps track of 
         the number of apples eaten and displays it on the screen.
+    unit_tests
+        This file unit tests our snake game.
 
 ***Functions***
     play_game

@@ -33,6 +33,8 @@ This code relies on the classic_snake.py file to function.
 		the get_key_pressed	function determines how the snake moves 
 		based on the user key imput. The show score function keeps track 
         of the number of apples eaten and displays it on the screen.
+    unit_tests
+        This file unit tests our snake game.
 
 ***Functions***
     The functions in this file are:

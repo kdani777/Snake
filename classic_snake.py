@@ -12,6 +12,10 @@ functions that will define the starting snake, create the apples
 to be hit, show score during gameplay, and allows for the user to
 move the snake using arrows on a keyboard 
 
+***FILES***
+    unit_tests.py
+        This file unit tests our snake game.
+
 ***CLASS***
     Apple
         This class creates an apple object and assigns it with
