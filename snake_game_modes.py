@@ -487,7 +487,7 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_width, \
             	 nblocks_height, block_size)
             if hit_random_snake:
                 test = Test_Snake()
-                test.hit_randome_snake_UT(hit_random_snake)
+                test.hit_random_snake_UT(hit_random_snake)
                 score = len(snake.x)-4
                 return score
 
