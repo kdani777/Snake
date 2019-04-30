@@ -1,5 +1,5 @@
 '''
-Authors: Kunal Dani, Marina Morrow, Shyanne Salen
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen, 
 Last Modified: April 29th, 2019
 Snake Project w/ Different Game Modes
 Software Carpentry
@@ -55,6 +55,7 @@ import pygame, sys
 import random
 from title_screens import title_screen, mode_screen, game_over_screen
 from snake_game_modes import move_snake
+from unit_tests import Test_Snake
 
 def play_game(game_width = 500, game_height = 500, FPS = 10, block_size = 20):
     '''
@@ -84,6 +85,8 @@ def play_game(game_width = 500, game_height = 500, FPS = 10, block_size = 20):
             game another time.
     '''
     pygame.init()
+    test = Test_Snake()
+    test.block_size_UT(block_size, game_height, game_width)
     nblocks_width = int(game_width/block_size)
     nblocks_height = int(game_height/block_size)
     DISPLAYSURF = pygame.display.set_mode((game_width, game_height))

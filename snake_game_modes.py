@@ -1,5 +1,5 @@
 '''
-Authors: Kunal Dani, Marina Morrow, Shyanne Salen
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen,
 Last Modified: April 29th, 2019
 Snake Project w/ Different Game Modes
 Software Carpentry
@@ -70,6 +70,7 @@ import pygame, sys
 import random
 from classic_snake import Snake, Apple, initial_snake, spawn_apple, show_score,\
 get_key_pressed
+from unit_tests import Test_Snake
 
 def get_colors():
     '''
@@ -431,6 +432,8 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_width, \
 
     '''
     colors = get_colors()
+    test = Test_Snake()
+    test.get_colors_UT(colors)
     pygame.display.update()
     hit_apple = False
     snake = initial_snake(3, nblocks_width, nblocks_height)
@@ -472,6 +475,8 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_width, \
             	random_number_rotten, rotten_apples, snake, block_size, \
             	colors)
             if hit_rotten_apple:
+                test = Test_Snake()
+                test.hit_rotten_apple_UT(hit_rotten_apple)
                 score = len(snake.x)-4
                 return score 
         if random_snakes_spawned:
@@ -479,6 +484,8 @@ def move_snake(DISPLAYSURF, block_size, fpsClock, FPS, game_width, \
             	random_snakes, snake, DISPLAYSURF, colors, nblocks_width, \
             	 nblocks_height, block_size)
             if hit_random_snake:
+                test = Test_Snake()
+                test.hit_randome_snake_UT(hit_random_snake)
                 score = len(snake.x)-4
                 return score
 

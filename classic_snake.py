@@ -1,5 +1,5 @@
 '''
-Authors: Kunal Dani, Marina Morrow, Shyanne Salen
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen,
 Last Modified: April 29th, 2019
 Snake Project
 Software Carpentry
@@ -42,6 +42,7 @@ from pygame.locals import *
 import pygame
 import sys
 import random
+from unit_tests import Test_Snake
 
 class Apple(object):
     '''
