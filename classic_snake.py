@@ -165,8 +165,8 @@ def initial_snake(snake_size, nblocks_width, nblocks_height):
     for i in range(snake_size):
         snake.x.append(snake.x[0] - i)
         snake.y.append(snake.y[0])
-    test = Test_Snake()
-    test.snake_len_UT(snake_size, snake)
+#     test = Test_Snake()
+#     test.snake_len_UT(snake_size, snake)
     return snake
 
 
