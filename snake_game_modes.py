@@ -1,5 +1,5 @@
 '''
-Authors: Kunal Dani, Marina Morrow, Shyanne Salen,
+Authors: Kunal Dani, Marina Morrow, Shyanne Salen
 Last Modified: April 29th, 2019
 Snake Project w/ Different Game Modes
 Software Carpentry
